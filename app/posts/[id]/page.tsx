@@ -1,6 +1,17 @@
 import { getPostData } from "../../../lib/posts";
 import Comments from "../../../components/Comments";
 // params id에는 클릭한 글의 파일 이름이 들어옴
+
+// 각 글의 제목과 설명을 검색 엔진에 알려주는 함수
+export async function generateMetadata({ params }: {params: Promise<{ id: string}>}) {
+    const { id } = await params;
+    const postData = await getPostData(id);   
+
+    return {
+        title:postData.title,
+        description: postData.description,
+    };
+}
 export default async function Post({ params }: { params: Promise<{ id: string}>}) {
     const { id } = await params;    
     const postData = await getPostData(id);
