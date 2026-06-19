@@ -18,7 +18,7 @@ export default async function Post({ params }: { params: Promise<{ id: string}>}
 
     return(
         <main className="max-w-3xl mx-auto px-8 py-16">
-            <article className="prose lg:prose-xl">
+            <article className="prose lg:prose-xl dark:prose-invert">
                 <h1 className="text-4xl font-bold mb-4">{postData.title}</h1>
                 <p className="text-gray-500 mb-8">{postData.date}</p>
                 <div dangerouslySetInnerHTML={{__html: postData.contentHtml}}>
