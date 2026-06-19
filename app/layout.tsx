@@ -3,6 +3,7 @@ import "./globals.css";
 import Link from "next/link";
 import { Providers } from "./providers"; 
 import ThemeToggle from "../components/ThemeToggle"; 
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "나만의 블로그",
@@ -46,7 +47,7 @@ export default function RootLayout({
             </div>
           </footer>
         </Providers>
-
+        <Analytics></Analytics>
       </body>
     </html>
   );
