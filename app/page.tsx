@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getSortedPostsData } from "../lib/posts";
 import { supabase } from "../lib/supabase"; // 👈 Supabase 불러오기!
 
+export const dynamic = "force-dynamic";
+
 export default async function Home({ searchParams }: { searchParams: Promise<{ tag?: string }> }) {
   const { tag } = await searchParams;
   const allPosts = getSortedPostsData();

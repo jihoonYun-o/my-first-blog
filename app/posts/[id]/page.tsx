@@ -2,6 +2,7 @@ import { getPostData } from "../../../lib/posts";
 import Comments from "../../../components/Comments";
 import { supabase } from "../../../lib/supabase"; // 👈 Supabase 불러오기
 
+export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const postData = await getPostData(id);
