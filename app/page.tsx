@@ -1,15 +1,21 @@
 import Link from "next/link";
 import { getSortedPostsData } from "../lib/posts";
+import { supabase } from "../lib/supabase"; // 👈 Supabase 불러오기!
 
-// 👇 주소창의 쿼리(?tag=React)를 읽어오기 위해 searchParams를 추가합니다.
 export default async function Home({ searchParams }: { searchParams: Promise<{ tag?: string }> }) {
   const { tag } = await searchParams;
   const allPosts = getSortedPostsData();
 
-  // 1. 모든 글에서 태그만 쏙쏙 뽑아서 중복을 제거합니다. (예: ['일상', '회고', 'Next.js'])
-  const allTags = Array.from(new Set(allPosts.flatMap(post => post.tags || [])));
+  // 👇 1. DB에서 모든 글의 조회수를 한 번에 가져옵니다.
+  const { data: views } = await supabase.from('views').select('slug, count');
+  
+  // 👇 2. 조회수를 카드에 넣기 쉽게 변환합니다. (예: { "my-first-post": 10, "my-second-post": 5 })
+  const viewCounts = views?.reduce((acc, view) => {
+    acc[view.slug] = view.count;
+    return acc;
+  }, {} as Record<string, number>) || {};
 
-  // 2. 선택된 태그가 있으면 그 태그가 포함된 글만 남기고, 없으면 전체 글을 보여줍니다.
+  const allTags = Array.from(new Set(allPosts.flatMap(post => post.tags || [])));
   const filteredPosts = tag
     ? allPosts.filter(post => post.tags?.includes(tag))
     : allPosts;
@@ -18,7 +24,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ t
     <main className="min-h-screen p-8 max-w-3xl mx-auto">
       <h1 className="text-3xl font-bold mt-10 mb-8 text-gray-900 dark:text-gray-100">Posts</h1>
 
-      {/* 🏷️ 태그 필터 버튼 영역 */}
+      {/* 태그 필터 버튼 영역 */}
       <div className="flex flex-wrap gap-2 mb-8">
         <Link
           href="/"
@@ -41,7 +47,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ t
         ))}
       </div>
 
-      {/* 📝 글 목록 영역 */}
+      {/* 글 목록 영역 */}
       <div className="flex flex-col gap-4">
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
@@ -54,8 +60,13 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ t
               <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{post.description}</p>
               
               <div className="flex justify-between items-center">
-                <time className="text-xs text-gray-400 dark:text-gray-500">{post.date}</time>
-                {/* 카드 안에도 작게 태그를 보여줍니다 */}
+                {/* 👇 날짜 옆에 조회수를 추가했습니다! */}
+                <div className="flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500">
+                  <time>{post.date}</time>
+                  <span>·</span>
+                  <span>👀 {viewCounts[post.id] || 0} views</span>
+                </div>
+                
                 <div className="flex gap-2">
                   {post.tags?.map(t => (
                     <span key={t} className="text-xs text-blue-500 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded-md">
