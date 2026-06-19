@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Providers } from "./providers"; 
 import ThemeToggle from "../components/ThemeToggle"; 
 import { Analytics } from "@vercel/analytics/react";
-
+import "highlight.js/styles/atom-one-dark.css";
 export const metadata: Metadata = {
   title: "나만의 블로그",
   description: "Next.js와 Tailwind CSS로 만든 블로그입니다.",
