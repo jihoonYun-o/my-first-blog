@@ -7,8 +7,8 @@ export default function Comments() {
         <div className="mt-20">
             <Giscus
                 id="comments"
-                repo="jihoonYun-o/my-blog"
-                repoId=""
+                repo="jihoonYun-o/my-first-blog"
+                repoId="R_kgDOS_MVkw"
                 category="Announcements"
                 categoryId=""
                 mapping="pathname"
