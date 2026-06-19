@@ -2,6 +2,8 @@
 import type { Metadata } from "next"; // 웹페이지 정보(메타데이터)를 설정
 import "./globals.css"; // TailWind CSS를 전체 페이지에 적용
 import Link from "next/link"; // 부드럽게 페이지 이동 
+import { Providers } from "./providers";
+import ThemeToggle from "../components/ThemeToggle";
 
 // 블로그 기본 정보 설정 및 SEO 최적화
 // 브라우저 탭에 뜨는 이름과 구글 검색 시 나오는 설명
@@ -19,31 +21,34 @@ export default function RootLayout({
 }>) {
   return (
     // 웹페이지의 기본 언어를 한국어로 설정
-    <html lang="ko">
-      <body className="bg-gray-50 text-gray-900 font-sans">
-        <header className="bg-white border-b border-gray-200">
-         
-          <div className="max-w-3xl mx-auto px-8 py-4 flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold text-blue-600">
-              My blog
-            </Link>
+    <html lang="ko" suppressContentEditableWarning>
+      <body className="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
+        <Providers>
+          <header className="bg-white border-b border-gray-200">
+          
+            <div className="max-w-3xl mx-auto px-8 py-4 flex justify-between items-center">
+              <Link href="/" className="text-xl font-bold text-blue-600">
+                My blog
+              </Link>
 
-            <nav className="flex gap-6 text-sm font-medium text-gray-600">
-              <Link href="/" className="hover:text-blue-600 transition-colors">홈</Link>
-              <Link href="/about" className="hover:text-blue-600 transition-colors">소개</Link>
-            </nav>
-          </div>  
-        </header>
+              <nav className="flex gap-6 text-sm font-medium text-gray-600">
+                <Link href="/" className="hover:text-blue-600 transition-colors">홈</Link>
+                <Link href="/about" className="hover:text-blue-600 transition-colors">소개</Link>
+                <ThemeToggle></ThemeToggle>
+              </nav>
+            </div>  
+          </header>
 
-        <div className="min-h-screen"> 
-          {children}
-        </div>
-
-        <footer className="bg-white border-t border-gray-200 mt-12">
-          <div className="max-w-3xl mx-auto px-8 py-8 text-center text-sm text-gray-400">
-           © 2026 MyBlog. All rights reserved.
+          <div className="min-h-screen"> 
+            {children}
           </div>
-        </footer>
+
+          <footer className="bg-white border-t border-gray-200 mt-12">
+            <div className="max-w-3xl mx-auto px-8 py-8 text-center text-sm text-gray-400">
+            © 2026 MyBlog. All rights reserved.
+            </div>
+          </footer>
+          </Providers>
       </body>
     </html>
   );
