@@ -2,6 +2,7 @@
 title: "my first blog post"
 date : "2026-06-18"
 description : "first post after making Blog"
+tags : ["daily", "development"] 
 ---
 
 # Hello!

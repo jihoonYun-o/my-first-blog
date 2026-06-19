@@ -2,6 +2,7 @@
 title : "Second post"
 date: "2026-06-19"
 description : "Deployed Blog"
+tags : ["Daily", "Next.js"]
 ---
 
 # Completed to Deploy !
@@ -14,11 +15,11 @@ Meow
 
 Is this cute? 
 
-이것은 자바스크립트 코드 테스트입니다.
+This is a Java Code test
 
 ```javascript
 function sayHello(name) {
-  console.log("안녕하세요, " + name + "님!");
+  console.log("Hello, " + name );
 }
-sayHello("개발자");
+sayHello("Developer");
 ```

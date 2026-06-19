@@ -31,7 +31,7 @@ export function getSortedPostsData() {
         // id와 데이터를합쳐서 반환
         return {
             id, 
-            ...(matterResult.data as {title: string; date: string; description: string}),
+            ...(matterResult.data as {title: string; date: string; description: string; tags?: string[]}),
         };
     });
     // 날짜를 기준으로 최신 글이 위로 오도록 정렬
