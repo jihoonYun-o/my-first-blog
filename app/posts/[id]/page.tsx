@@ -1,5 +1,5 @@
 import { getPostData } from "../../../lib/posts";
-import Comments from "@/components/Comments";
+import Comments from "../../../components/Comments";
 // params id에는 클릭한 글의 파일 이름이 들어옴
 export default async function Post({ params }: { params: Promise<{ id: string}>}) {
     const { id } = await params;    
