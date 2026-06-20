@@ -6,10 +6,9 @@ import remarkRehype from "remark-rehype";
 import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
 
-const notion = new Client({ auth:"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"  });
-const n2m = new NotionToMarkdown({ notionClient: notion }); 
-const databaseId = "385b8e7c3bb880ac906c000b3a20d5ab";
-// 1. 메인 화면용: 노션에서 'Published' 체크된 글 목록만 가져오기
+const notion = new Client({ auth: process.env.NOTION_API_KEY });
+const n2m = new NotionToMarkdown({ notionClient: notion });
+const databaseId = process.env.NOTION_DATABASE_ID as string; // 1. 메인 화면용: 노션에서 'Published' 체크된 글 목록만 가져오기
 export async function getSortedPostsData() {
   // 👇 최신 버전에 맞게 databases -> dataSources 로 변경!
   const response = await notion.dataSources.query({
