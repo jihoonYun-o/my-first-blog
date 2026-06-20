@@ -24,16 +24,15 @@ export default function RootLayout({
         <Providers>
           <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
             <div className="max-w-3xl mx-auto px-8 py-4 flex justify-between items-center">
-              <Link href="/" className="text-xl font-bold text-blue-600 dark:text-blue-400">
-                MyBlog.
-              </Link>
+            <a href="/" className="text-xl font-bold text-blue-600 dark:text-blue-400">
+              MyBlog.
+            </a>
 
-              <nav className="flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-300">
-                <Link href="/" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">홈</Link>
+            <nav className="flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-300">
+                <a href="/" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">홈</a>
                 <Link href="/about" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">소개</Link>
-               
                 <ThemeToggle />
-              </nav>
+            </nav>
             </div>
           </header>
 
